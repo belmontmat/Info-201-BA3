@@ -1,5 +1,4 @@
-sep=,
-continent,year,occurrence,"Total deaths",Injured,Affected,Homeless,"Total affected","Total damage  ('000 US$)"
+continent,year,occurrence,Total deaths,Injured,Affected,Homeless,Total affected,Total damage  ('000 US$)
 Africa,1900,1,11000,,,,,
 Africa,1903,1,,,,,,
 Africa,1906,1,,,,,,
@@ -447,7 +446,3 @@ Oceania,2015,25,66,174,2913248,6901,2920323,3530300
 Oceania,2016,10,55,144,646386,540,647070,1260000
 Oceania,2017,7,12,6,60462,626,61094,3303000
 Oceania,2018,2,,,87000,,87000,
-
-
-"Created on: May 13, 2018"
-"Source: EM-DAT: The Emergency Events Database - Universite catholique de Louvain (UCL) - CRED, D. Guha-Sapir - www.emdat.be, Brussels, Belgium"
