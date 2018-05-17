@@ -1,8 +1,8 @@
 library(dplyr)
-
+library(ggplot2)  
 #read temperature data frame
 temp_df <- read.csv(
-  "data/data-society-global-climate-change-data/GlobalTemperatures.CSV",
+  "data/data-society-global-climate-change-data/BerkleyAverageTemp.csv",
   stringsAsFactors = FALSE
   )
 
