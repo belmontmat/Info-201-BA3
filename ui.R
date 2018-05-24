@@ -6,11 +6,11 @@ library(ggplot2)
 library(maps)
 shinyUI(navbarPage(
   theme = shinytheme("cerulean"),
-  "Project",
+  "Temperature and Disasters",
   # Create a tab panel for your map
   tabPanel(
     "Overview",
-    titlePanel(""),
+    titlePanel(),
     # Create sidebar layout
     sidebarLayout(
       
@@ -25,25 +25,29 @@ shinyUI(navbarPage(
       # Main panel: display map
       mainPanel(
         tags$link(rel = "stylesheet", type = "text/css", href = "style.css"),
-        tags$h2(id = "main-heading", ""),
-        plotOutput("plot_over")
+        tags$h2(id = "main-heading", "")
+        # Maybe add an image
       )
     )
   ),
   tabPanel(
-    "Tab 1",
-    titlePanel(""),
+    "USA Heatmap",
+    titlePanel("Climate Change in the USA"),
     # Create sidebar layout
     sidebarLayout(
       
       # Side panel for controls
       sidebarPanel(
-        selectInput(
-        )
+        sliderInput("year","Pick A Year", min = 1750, max = 2013, value = 2012),
+        
+        selectInput("unit", "Pick A Unit Of Temperature", choices = list(
+          "Farenheit", "Celsius"), selected = "Celsius")
       ),
       mainPanel(
-        tags$h2(id = "main-heading", ""),
-        plotOutput("plot1")
+        tags$link(rel = "stylesheet", type = "text/css", href = "style.css"),
+        tags$h2(id = "main-heading", "Temperature By Year"),
+        plotlyOutput("plot1"),
+        textOutput("disaster_text")
       )
     )
   ),
@@ -96,6 +100,23 @@ shinyUI(navbarPage(
       mainPanel(
         tags$h2(id = "main-heading", ""),
         plotOutput("plot4")
+      )
+    )
+  ),
+  tabPanel(
+    "Tab 5",
+    titlePanel(""),
+    # Create sidebar layout
+    sidebarLayout(
+      
+      # Side panel for controls
+      sidebarPanel(
+        selectInput(
+        )
+      ),
+      mainPanel(
+        tags$h2(id = "main-heading", ""),
+        plotOutput("plot5")
       )
     )
   )
