@@ -78,6 +78,20 @@ shinyServer(function(input, output) {
   })
   # Plot for Tab 4
   output$plot4 <- renderPlot ({
+    #get needed data
+    temp <- read.csv("data/data-society-global-climate-change-data/AverageGlobalTempPerYear.csv")
+    disa <- read.csv("data/emdat-disasters/Data.csv")
+    #reduce to needed columns
+    disaster <- disa %>% 
+      select(year,occurrence)
+    #combine data frames
+    names(disaster)[1] <- "Year"
+    combined <- merge(temp,disaster,by="Year")
+    #aggregate to remove repeated rows
+    combined <- aggregate(. ~ Year + X + Temp, data = combined,sum)
+    p <- ggplot() +
+      geom_line(mapping = aes(x = combined$Temp, y = combined$occurrence))
+    p
     
   })
   # Plot for Tab 5

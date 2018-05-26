@@ -11,3 +11,5 @@ year_jitter <- function(data,y_choice,country){
     x = year, y = y_choice
     ))
 }
+
+year_jitter(df,"occurence","Africa")
