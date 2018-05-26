@@ -10,25 +10,11 @@ shinyUI(navbarPage(
   # Create a tab panel for your map
   tabPanel(
     "Overview",
-    titlePanel(),
+    titlePanel("test")
     # Create sidebar layout
-    sidebarLayout(
-      
-      # Side panel for controls
-      sidebarPanel(
-        # Input to select variable to map
-        selectInput(
-          )
-        )
-      ),
-      
+
       # Main panel: display map
-      mainPanel(
-        tags$link(rel = "stylesheet", type = "text/css", href = "style.css"),
-        tags$h2(id = "main-heading", "")
         # Maybe add an image
-      )
-    )
   ),
   tabPanel(
     "USA Heatmap",
@@ -60,8 +46,8 @@ shinyUI(navbarPage(
       
       # Side panel for controls
       sidebarPanel(
-        selectInput(
-                    )
+        # selectInput(
+        #             )
       ),
       mainPanel(
         tags$h2(id = "main-heading", ""),
@@ -77,8 +63,8 @@ shinyUI(navbarPage(
       
       # Side panel for controls
       sidebarPanel(
-        selectInput(
-        )
+        # selectInput(
+        # )
       ),
       mainPanel(
         tags$h2(id = "main-heading", ""),
@@ -94,8 +80,8 @@ shinyUI(navbarPage(
       
       # Side panel for controls
       sidebarPanel(
-        selectInput(
-        )
+        # selectInput(
+        # )
       ),
       mainPanel(
         tags$h2(id = "main-heading", ""),
@@ -111,8 +97,8 @@ shinyUI(navbarPage(
       
       # Side panel for controls
       sidebarPanel(
-        selectInput(
-        )
+        # selectInput(
+        # )
       ),
       mainPanel(
         tags$h2(id = "main-heading", ""),
@@ -120,4 +106,5 @@ shinyUI(navbarPage(
       )
     )
   )
+)
 )
