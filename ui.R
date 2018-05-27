@@ -97,12 +97,11 @@ shinyUI(navbarPage(
       
       # Side panel for controls
       sidebarPanel(
-        # selectInput(
-        # )
+         sliderInput("tab5_year", label = "Year", min = 1743, max = 2013, value = 2000)
       ),
       mainPanel(
         tags$h2(id = "main-heading", ""),
-        plotOutput("plot5")
+        plotlyOutput("plot5")
       )
     )
   )
