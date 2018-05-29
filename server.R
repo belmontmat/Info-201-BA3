@@ -95,20 +95,24 @@ shinyServer(function(input, output) {
   # Plot for Tab 5
   output$plot5 <- renderPlotly ({
     source("scripts/average_global_temp.R")
+    source("scripts/global_disasters.R")
     global_temps <- temperatures_by_country %>% 
       filter(year == input$tab5_year) %>% 
-      group_by(country_code) %>% 
+      group_by(iso) %>% 
       summarise(AverageTemperature = mean(AverageTemperature))
+    global_disasters <- disasters_by_country %>% 
+      filter(year == input$tab5_year)
+    global_data <- full_join(global_temps, global_disasters, by = "iso")
     
     plot <- plot_geo() %>% 
       add_trace(
-        z = global_temps$AverageTemperature, 
-        locations = global_temps$country_code, color = ~global_temps$AverageTemperature, colors= "Blues") %>% 
+        z = global_data$AverageTemperature, text = paste("# of Disasters:", global_data$occurrence),
+        locations = global_data$iso, color = ~global_data$AverageTemperature, colors= "Blues") %>% 
       layout(geo = list(
         showframe = FALSE,
         projection = list(type = 'Mercator')
       )
-      )
+      ), opacity = global_data$occurences
     
     plot
   })

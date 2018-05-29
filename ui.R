@@ -118,8 +118,10 @@ shinyUI(navbarPage(
     sidebarLayout(
       
       # Side panel for controls
+      # Used the link below to figure out how to remove comma from years
+      # https://stackoverflow.com/questions/26636335/formatting-number-output-of-sliderinput-in-shiny
       sidebarPanel(
-         sliderInput("tab5_year", label = "Year", min = 1743, max = 2013, value = 2000)
+         sliderInput("tab5_year", label = "Year", min = 1743, max = 2013, value = 2000, sep = "")
       ),
       mainPanel(
         tags$h2(id = "main-heading", ""),
