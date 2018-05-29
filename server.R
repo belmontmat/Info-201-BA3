@@ -79,6 +79,12 @@ shinyServer(function(input, output) {
                      stringsAsFactors = FALSE)
     disa <- read.csv("data/emdat-disasters/Data.csv",
                      stringsAsFactors = FALSE)
+    
+    continent_disaster <- disa %>%
+      filter(continent == input$continent_tab4) %>% 
+      select(year,occurrence)
+    names(continent_disaster)[1] <- "Year"
+    continent_combined <- merge(temp,continent_disaster,by = "Year")
     #reduce to needed columns
     disaster <- disa %>% 
       select(year,occurrence)
@@ -88,9 +94,22 @@ shinyServer(function(input, output) {
     #aggregate to remove repeated rows
     combined <- aggregate(. ~ Year + X + Temp, data = combined,sum)
     p <- ggplot() +
-      geom_line(mapping = aes(x = combined$Temp, y = combined$occurrence))
+      geom_line(mapping = aes(x = combined$Temp, y = combined$occurrence),
+                color = "red") +
+      geom_line(mapping = aes(x = continent_combined$Temp, y = continent_combined$occurrence),
+                color = "blue") +
+      labs(title = "How Disasters Relate to Temperature",
+           y = "Number of Disasters",
+           x = "Temperature")
     p
     
+  })
+  output$text_tab4 <- renderText({
+    "As you can see by the graph, the amount of disasters trends upward with 
+    higher temperatures. This shows a correlation between how hot it is and how
+    many disasters occur. We can also observe the fact that Africa has the highest
+    occurrence of disasters over time, while more developed conitnents have lower 
+    occurrences, even though they generate a larger amount of pollution than Africa."
   })
   # Plot for Tab 5
   output$plot5 <- renderPlotly ({

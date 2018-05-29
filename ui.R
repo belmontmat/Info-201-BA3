@@ -5,6 +5,7 @@ library(dplyr)
 library(ggplot2)
 library(plotly)
 library(maps)
+
 shinyUI(navbarPage(
   theme = shinytheme("cerulean"),
   "Temperature and Disasters",
@@ -95,19 +96,24 @@ shinyUI(navbarPage(
     )
   ),
   tabPanel(
-    "Tab 4",
-    titlePanel(""),
+    "Line Graph",
+    titlePanel("Global Line Graph"),
     # Create sidebar layout
     sidebarLayout(
       
       # Side panel for controls
       sidebarPanel(
-        # selectInput(
-        # )
+        selectInput(
+          "continent_tab4",
+          choices = c("Africa","Americas","Asia","Europe","Oceania"),
+          label = "Select Continent"
+        )
       ),
       mainPanel(
-        tags$h2(id = "main-heading", ""),
-        plotOutput("plot4")
+        tags$h2(id = "main-heading", "Line Graph Relating Higher Temperatures with Frequency of Disasters"),
+        plotOutput("plot4"),
+        textOutput("text_tab4")
+        
       )
     )
   ),
