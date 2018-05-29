@@ -131,7 +131,7 @@ shinyServer(function(input, output) {
         showframe = FALSE,
         projection = list(type = 'Mercator')
       )
-      ), opacity = global_data$occurences
+      )
     
     plot
   })
