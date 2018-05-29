@@ -10,31 +10,52 @@ shinyUI(navbarPage(
   "Temperature and Disasters",
   # Create a tab panel for your map
   tabPanel(
-    "Overview",
-    titlePanel("test")
-    # Create sidebar layout
-
-      # Main panel: display map
-        # Maybe add an image
+    "Introduction",
+    titlePanel("The Association Between The Rise In Temperature And Frequency Of Natural Disasters"),
+    mainPanel(
+    tags$p("This project is aimed towards allowing users to discover the relationships and impacts between the increase in temperature and number of natural disasters.",
+           "Recently the U.S. has pulled out of the Paris Climate Agreement so we have focused on the U.S. to drive home this is a local and global phenomenon"),
+      img(src="emdat.jpg", align = "center"),
+      tags$p("Our data for temperature comes from ",
+             tags$a("The International Disaster Database",
+                    href = "https://www.emdat.be/"),
+             " and limiting the disasters to ",
+             tags$i("natural, meteorological, hydrological, and climatological"),
+             "disasters."),
+      img(src="Data_Society.png", align = "center", width = "600px"),
+      tags$p("We'll be using",
+             tags$a("the Data Society", href = "https://datasociety.com/about-us/"),
+             " for our climate change dataset. Data society is a data science training and consulting firm based in Washington, D.C. We retrieved the data from ",
+             tags$a("Data.World", href = "https://data.world/data-society/global-climate-change-data"),
+             ", a database of datasets.")
+    )
+    
   ),
   tabPanel(
     "USA Heatmap",
-    titlePanel("Climate Change in the USA"),
+    titlePanel("U.S. All-In-One Overview"),
     # Create sidebar layout
     sidebarLayout(
       
       # Side panel for controls
       sidebarPanel(
-        sliderInput("year","Pick A Year", min = 1750, max = 2013, value = 2012),
+        sliderInput("year","Pick A Year", min = 1750, max = 2013, value = 2012,
+                    step = 10),
         
         selectInput("unit", "Pick A Unit Of Temperature", choices = list(
-          "Farenheit", "Celsius"), selected = "Celsius")
+          "Fahrenheit", "Celsius"), selected = "Celsius")
       ),
       mainPanel(
         tags$link(rel = "stylesheet", type = "text/css", href = "style.css"),
         tags$h2(id = "main-heading", "Temperature By Year"),
+        tags$p("How has temperature in the U.S. as a whole changed over time? ",
+               "Has this had an impact on number of natural disasters?",
+               "On this page we can see a visual overview of many different factors."),
         plotlyOutput("plot1"),
-        textOutput("disaster_text")
+        textOutput("disaster_text"),
+        textOutput("temp_text"),
+        tags$p("We see there is indeed a rise in average temperature as well as",
+               "a rise in recorded disasters. A more in-depth analysis of each state can be seen in the next tab.")
       )
     )
   ),
