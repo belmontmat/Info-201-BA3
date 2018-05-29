@@ -30,8 +30,8 @@ national_state_temp <- average_usa_temp
 national_state_temp$State <- "Nation"
 
 specific_state_temp <- average_usa_temp %>%
-                         filter(State == "Michigan")
-average_1800_2015_temp$State <- "Michigan"
+                         filter(State == "Washington")
+average_1800_2015_temp$State <- "Washington"
 
 inc <- function(x)
 {
@@ -77,24 +77,28 @@ for (i in 1815:2010) {
     inc(x)
   }
 } 
+average_1800_2015_temp <- average_1800_2015_temp %>%
+                          filter(HighTemp != "NaN")
 
   national_fit <- lm(NationAvg ~ Year, data = average_1800_2015_temp)
   state_fit <- lm(AvgTemp ~ Year, data = average_1800_2015_temp)
   
-  p <- plot_ly(average_1800_2015_temp, x = ~Year, y = ~NationHigh, type = 'scatter', mode = 'lines',
+  average_1800_2015_temp$Year <- factor(average_1800_2015_temp$Year, levels = average_1800_2015_temp[["Year"]])
+  
+  p <- plot_ly(average_1800_2015_temp, x = ~Year, y = ~NationHigh, type = 'scatter', mode = 'lines & markers',
                line = list(color = 'transparent'),
                showlegend = FALSE, text = 'National High', name = " ") %>%
     add_trace(y = ~NationLow, type = 'scatter', mode = 'lines',
               fill = 'tonexty', fillcolor='rgba(0,100,80,0.2)', line = list(color = 'transparent'),
               showlegend = FALSE, text = 'National Low', name = " ") %>%
-    add_trace(x = ~Year, y = ~NationAvg, type = 'scatter', mode = 'lines',
+    add_trace(y = ~NationAvg, type = 'scatter', mode = 'lines',
               line = list(color='rgb(0,100,80)'),
               text = 'National Average', name = " ") %>%
-    add_trace(x = ~Year, y = fitted(national_fit),
-              line = list(color='rgb(0,100,80)', dash = 'dash'), text = 'National Trend',
+    add_trace(y = fitted(national_fit),
+              line = list(color='rgb(0,0,0)', dash = 'dash'), text = 'National Trend',
               name = " ") %>%
     
-    add_trace(x = ~Year, y = ~AvgTemp, type = 'scatter', mode = 'lines',
+    add_trace(y = ~AvgTemp, type = 'scatter', mode = 'lines',
               line = list(color='rgb(100,0,40)'),
               text = ~paste(average_1800_2015_temp$State, 'Average'), name = " ") %>%
     add_trace(y = ~HighTemp, type = 'scatter', mode = 'lines', 
@@ -103,14 +107,15 @@ for (i in 1815:2010) {
     add_trace(y = ~LowTemp, type = 'scatter', mode = 'lines',
               fill = 'tonexty', fillcolor='rgba(100,0,40,0.2)', line = list(color = 'transparent'),
               showlegend = FALSE, text = ~paste(average_1800_2015_temp$State, 'Low'), name = " ") %>%
-    add_trace(x = ~Year, y = fitted(state_fit),
-              line = list(color='rgb(100,0,40)', dash = 'dash'), text = ~paste(average_1800_2015_temp$State, 'Trend'),
+    add_trace(y = fitted(state_fit),
+              line = list(color='rgb(0,0,0)', dash = 'dash'), text = ~paste(average_1800_2015_temp$State, 'Trend'),
               name = " ") %>%
 
   
     layout(title = ~paste("Temperatures for", average_1800_2015_temp$State,
                           "and United States"),
            paper_bgcolor='rgb(255,255,255)', plot_bgcolor='rgb(229,229,229)',
+           hovermode = 'compare',
            xaxis = list(title = "Years",
                         gridcolor = 'rgb(255,255,255)',
                         showgrid = TRUE,
