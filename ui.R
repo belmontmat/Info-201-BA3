@@ -24,7 +24,7 @@ shinyUI(navbarPage(
         and number of natural disasters.",
         "Recently the U.S. has pulled out of the Paris Climate Agreement
         so we have focused on the U.S. to drive home
-        this is a local and global phenomenon"
+        this is a both local and global phenomenon."
       ),
       img(src = "emdat.jpg", align = "center"),
       tags$p(
@@ -46,7 +46,7 @@ shinyUI(navbarPage(
         tags$a("Data.World",
           href = "https://data.world/data-society/global-climate-change-data"
         ),
-        ", a database of datasets."
+        ", which is a database of datasets."
       )
     )
   ),
@@ -73,20 +73,25 @@ shinyUI(navbarPage(
       ),
       mainPanel(
         tags$link(rel = "stylesheet", type = "text/css", href = "style.css"),
-        tags$h2(id = "main-heading", "Temperature By Year"),
+        tags$h2(id = "main-heading", "How has temperature in the U.S. as a 
+                whole changed over time?"),
         tags$p(
-          "How has temperature in the U.S. as a whole changed over time? ",
+          "Temperature By Year: ",
           "Has this had an impact on number of natural disasters?",
-          "On this page we can see a visual
-          overview of many different factors."
+          "On this page we can see a visualization
+          which overviews many different factors that look into these
+          questions."
         ),
         plotlyOutput("plot1"),
         textOutput("disaster_text"),
         textOutput("temp_text"),
         tags$p(
-          "We see there is indeed a rise in average temperature as well as",
-          "a rise in recorded disasters. A more in-depth
-          analysis of each state can be seen in the next tab."
+          "It is evident that there is indeed a rise in average temperature;
+           there is also an apparent",
+          "a rise in recorded natural disasters. A more in-depth analysis of 
+           each state's temperatures can be seen in the next tab. This will 
+           provide clarity towards understanding the temperature trends in the
+           U.S."
         )
       )
     )
@@ -94,18 +99,34 @@ shinyUI(navbarPage(
   
   # Create a tabPanel to show your bar plot
   tabPanel(
-    "Tab 2",
-    titlePanel(""),
+    "Temperature Trends",
+    titlePanel("State Versus National Temperature Trends"),
     # Create sidebar layout
     sidebarLayout(
 
       # Side panel for controls
       sidebarPanel(
-        # selectInput(
-        #             )
+        selectInput(
+          "state_select",
+          choices = c("Alabama", "Alaska" ,"Arizona", "Arkansas", "California",
+                      "Colorado", "Connecticut", "Delaware",
+                      "District Of Columbia", "Florida", "Georgia (State)",
+                      "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa",
+                      "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland",
+                      "Massachusetts", "Michigan", "Minnesota", "Mississippi", 
+                      "Missouri", "Montana", "Nebraska", "Nevada",
+                      "New Hampshire", "New Jersey", "New Mexico", "New York",
+                      "North Carolina", "North Dakota", "Ohio", "Oklahoma",
+                      "Oregon", "Pennsylvania", "Rhode Island",
+                      "South Carolina", "South Dakota", "Tennessee",
+                      "Texas", "Utah", "Vermont", "Virginia", "Washington",
+                      "West Virginia", "Wisconsin", "Wyoming"),
+          label = "Select State"
+        )
       ),
       mainPanel(
-        tags$h2(id = "main-heading", ""),
+        tags$h2(id = "main-heading", "How has the temperature for a state
+                changed in the past years?"),
         plotlyOutput("plot2")
       )
     )
@@ -125,7 +146,7 @@ shinyUI(navbarPage(
           label = "Year Range",
           min = 1944,
           max = 2018,
-          value = c(1950, 2000)
+          value = c(1950, 2017)
         )
       ),
       mainPanel(

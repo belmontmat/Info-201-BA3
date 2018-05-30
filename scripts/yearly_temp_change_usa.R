@@ -2,7 +2,7 @@ library(dplyr)
 library(plotly)  
 #read temperature data frame
 
-temp_df <- read.csv("GlobalLandTemperaturesByState.csv",
+temp_df <- read.csv("data/data-society-global-climate-change-data/GlobalLandTemperaturesByState.csv",
   stringsAsFactors = FALSE)
 
 
