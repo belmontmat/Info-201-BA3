@@ -22,8 +22,8 @@ shinyUI(navbarPage(
         "This project is aimed towards allowing users to discover the
         relationships and impacts between the increase in temperature
         and number of natural disasters.",
-        "Recently the U.S. has pulled out of the Paris Climate Agreement
-        so we have focused on the U.S. to drive home
+        "Recently the U.S. has pulled out of the Paris Climate Agreement,
+        so we have focused on the U.S. to drive home that
         this is a both local and global phenomenon."
       ),
       img(src = "emdat.jpg", align = "center"),
@@ -127,7 +127,20 @@ shinyUI(navbarPage(
       mainPanel(
         tags$h2(id = "main-heading", "How has the temperature for a state
                 changed in the past years?"),
-        plotlyOutput("plot2")
+        tags$p("The function of this interactive visualization is to detail 
+               the trends of the temperature data for the U.S. as a whole
+               nation and as individual states."),
+        plotlyOutput("plot2"),
+        tags$p("Picking off where the last tab left off, the line graph trends
+               for both the nation and all its states shows that there is
+               a gradual increasing trend in average temperature. Another
+               interesting point to note is the uncertainy of the data
+               in the earlier years, this is due to inaccuracies of how
+               temperature was measured-- this has since changed since
+               the invention of more accurate temperature measurement. One
+               key thing to note is how average temperatures for both the states
+               and the nation are proportionate (this is depicted by the 
+               similar slopes of the trend lines).")
       )
     )
   ),
@@ -137,7 +150,7 @@ shinyUI(navbarPage(
 
   tabPanel(
     "Cost Bar Graph",
-    titlePanel("Cost Bar Graph"),
+    titlePanel("Impact on U.S. Economy Visualized"),
     # Create sidebar layout
     sidebarLayout(
       # Side panel for controls
@@ -150,8 +163,21 @@ shinyUI(navbarPage(
         )
       ),
       mainPanel(
-        tags$h2(id = "main-heading", ""),
-        plotlyOutput("plot3")
+        tags$h2(id = "main-heading", "How much is the US spending on 
+                disasters per year?"),
+        tags$p("We complied data for U.S. disaster spendings, natural disaster
+               occurrences and the total damage in cost for as a result of 
+               these disasters."),
+        plotlyOutput("plot3"),
+        tags$p("As we focus on the impact on the U.S. as a nation, we inquired
+               how much the U.S. spends on natural disasters and the damage
+               that they inflict. From this graph, there is a clear increasing
+               trend of natural disaster spending. In addition to this, the
+               frequencies of which natural disasters are occurring have also
+               increased as time progresses, similar to how average temperatures
+               of the U.S. and its states have increased. With this information
+               in mind, we focused our attention to a global scale-- see next
+               tab.")
       )
     )
   ),

@@ -190,7 +190,7 @@ shinyServer(function(input, output) {
       
       
       layout(title = ~paste("Temperatures for", average_1800_2015_temp$State,
-                            "and United States"),
+                            "and the United States"),
              paper_bgcolor='rgb(255,255,255)', plot_bgcolor='rgb(229,229,229)',
              hovermode = 'compare',
              xaxis = list(title = "Years",
@@ -230,7 +230,9 @@ shinyServer(function(input, output) {
       type = "bar",
       color = plot_data$Total.damage....000.US..
     ) %>%
-      colorbar(title = "Damage Cost (Dollars)")
+      colorbar(title = "Damage Cost (in USD)")%>%
+      layout(title = "Natural Disaster Impacts on the U.S. Economy",
+             yaxis = list(title = "Natural Disaster Occurences"))
   })
 
   # Tab 4 -------------------------------------------------------------------
