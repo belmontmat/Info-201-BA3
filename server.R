@@ -244,7 +244,7 @@ shinyServer(function(input, output) {
 
 
   # Plot
-  output$plot4 <- renderPlotly({
+  output$plot4 <- renderPlot({
     # get needed data
     temp <- read.csv("data/data-society-global-climate-change-data/AverageGlobalTempPerYear.csv",
       stringsAsFactors = FALSE
@@ -293,9 +293,7 @@ shinyServer(function(input, output) {
         labels = c("Total", input$continent_tab4),
         values = c("red","blue")
       )
-
-    ggplotly(p) %>%
-      layout(hovermode = "compare")
+    p
   })
 
   # Text output

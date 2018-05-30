@@ -207,7 +207,7 @@ shinyUI(navbarPage(
           "This line graph helps to answer this question by relating",
           " temperature and occurrences of natural disasters."
         ),
-        plotlyOutput("plot4"),
+        plotOutput("plot4"),
         textOutput("text_tab4")
       )
     )
