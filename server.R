@@ -11,26 +11,8 @@ shinyServer(function(input, output) {
   
   # Plot for Tab 1
   output$plot1 <- renderPlotly ({
-    # Get our temperature data
-    temp <- read.csv("data/data-society-global-climate-change-data/GlobalLandTemperaturesByState.csv",
-                     stringsAsFactors = FALSE)
-    # Focus on the USA
-    temp <- temp %>% filter(Country == "United States")
-    # remove NAs
-    temp <- temp[complete.cases(temp),]
-    # Average the temp per year and state instead of monthly
-    temp$dt <- substr(temp$dt,1,4)
-    temp <- temp %>% group_by(dt, State) %>%
-      summarise(AverageTemperature = mean(AverageTemperature))
-    # Get map outlines
-    states <- map_data("state")
-    usa <- map_data("usa")
-    # In order to map our data we need to join it to our outline
-    # To do that we need to mfix some column names and Georgia
-    colnames(temp)[colnames(temp) == "State"] <- "region"
-    temp$region <- tolower(temp$region)
-    temp$region[temp$region == "georgia (state)"] <- "georgia" 
-    joined <- full_join(states, temp, by = "region")
+    # Data wrangling
+    source("scripts/avg_usa_temp.R")
     specific <- joined %>% filter(dt == input$year)
     # Change unit of measurement
     if (input$unit == "Fahrenheit"){
@@ -42,8 +24,8 @@ shinyServer(function(input, output) {
       mapping = aes(x = long, y = lat, group = group)
     ) +
       geom_polygon(
-        fill = "darkorange3",
-        color = "black"
+        fill = "grey",
+        color = "white"
       ) +
       coord_fixed(1.3) +
       geom_polygon(data = states, fill = NA, color = "white") +
@@ -55,7 +37,7 @@ shinyServer(function(input, output) {
                x = "Longitude",
                y = "Latitude") +
       # Add input theme
-      scale_fill_gradient(low = "#f73131", high = "#f7e64a", space = "Lab",
+      scale_fill_gradient(low = "#f7e64a", high = "#f73131", space = "Lab",
                           na.value = "grey50", guide = "colourbar")
     ggplotly(p)
   })
@@ -66,7 +48,21 @@ shinyServer(function(input, output) {
     disaster_df <- disaster_df %>% 
       filter(year == input$year) %>%
       select(occurrence)
-    paste0("There were ", disaster_df[1,1], " natural disasters this year")
+    num_dis <- disaster_df[1,1]
+    if(is.na(num_dis)){
+      paste0("There is no data on natural disasters for this year.")
+    }else if(num_dis != 1){
+      paste0("There were ", num_dis, " natural disasters in ",input$year,".")
+    } else {
+      paste0("There was one natural disaster in ",input$year,".")
+    }
+  })
+  output$temp_text <- renderText ({
+    source("scripts/avg_usa_temp.R")
+    specific <- joined %>% filter(dt == input$year)
+    paste0("The average temperature in the U.S. was ",
+           round(mean(specific$AverageTemperature),1),
+           "degrees ", input$unit, ".")
   })
   # Plot for Tab 2
   output$plot2 <- renderPlot ({
@@ -77,10 +73,18 @@ shinyServer(function(input, output) {
     
   })
   # Plot for Tab 4
-  output$plot4 <- renderPlot ({
+  output$plot4 <- renderPlotly ({
     #get needed data
-    temp <- read.csv("data/data-society-global-climate-change-data/AverageGlobalTempPerYear.csv")
-    disa <- read.csv("data/emdat-disasters/Data.csv")
+    temp <- read.csv("data/data-society-global-climate-change-data/AverageGlobalTempPerYear.csv",
+                     stringsAsFactors = FALSE)
+    disa <- read.csv("data/emdat-disasters/Data.csv",
+                     stringsAsFactors = FALSE)
+    
+    continent_disaster <- disa %>%
+      filter(continent == input$continent_tab4) %>% 
+      select(year,occurrence)
+    names(continent_disaster)[1] <- "Year"
+    continent_combined <- merge(temp,continent_disaster,by = "Year")
     #reduce to needed columns
     disaster <- disa %>% 
       select(year,occurrence)
@@ -90,12 +94,52 @@ shinyServer(function(input, output) {
     #aggregate to remove repeated rows
     combined <- aggregate(. ~ Year + X + Temp, data = combined,sum)
     p <- ggplot() +
-      geom_line(mapping = aes(x = combined$Temp, y = combined$occurrence))
-    p
+      geom_line(mapping = 
+                  aes(x = combined$Temp, 
+                      y = combined$occurrence, color = "red")) +
+      geom_line(mapping = 
+                  aes(x = continent_combined$Temp, 
+                      y = continent_combined$occurrence,color = "blue")
+                ) +
+      labs(title = "How Disasters Relate to Temperature",
+           y = "Number of Disasters",
+           x = "Temperature") +
+      scale_color_discrete(name = "Line Color",labels = c("Total",input$continent_tab4))
+      
+    ggplotly(p) %>% 
+      layout(hovermode = "compare")
     
   })
+  output$text_tab4 <- renderText({
+    "As you can see by the graph, the amount of disasters trends upward with 
+    higher temperatures. This shows a correlation between how hot it is and how
+    many disasters occur. We can also observe the fact that Asia has the highest
+    occurrence of disasters over time"
+  })
   # Plot for Tab 5
-  output$plot5 <- renderPlot ({
+  output$plot5 <- renderPlotly ({
+    source("scripts/average_global_temp.R")
+    source("scripts/global_disasters.R")
+    global_temps <- temperatures_by_country %>% 
+      filter(year == input$tab5_year) %>% 
+      group_by(iso) %>% 
+      summarise(AverageTemperature = mean(AverageTemperature))
+    global_disasters <- disasters_by_country %>% 
+      filter(year == input$tab5_year)
+    global_data <- full_join(global_temps, global_disasters, by = "iso")
     
+    plot <- plot_geo() %>% 
+      add_trace(
+        z = global_data$AverageTemperature, text = paste("# of Disasters:", global_data$occurrence),
+        locations = global_data$iso, color = ~global_data$AverageTemperature, colors= c("blue","orange")) %>% 
+      layout(geo = list(
+        showframe = FALSE,
+        projection = list(type = 'Mercator')
+        
+      )
+      ) %>% 
+      colorbar(title= "Average Temperature")
+    
+    plot
   })
 })
