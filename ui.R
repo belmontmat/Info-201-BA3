@@ -78,10 +78,9 @@ shinyUI(navbarPage(
         tags$p(
           "Temperature By Year: ",
           "Has this had an impact on number of natural disasters?",
-          "On this page we can see a visual overview of many different",
-          "factors. On this page we can see a visualization
-          which overviews many different factors that look into these
-          questions."
+          "On this page we can see a visualization
+           which overviews many different factors that look into these
+           questions."
         ),
         plotlyOutput("plot1"),
         textOutput("disaster_text"),
@@ -89,7 +88,7 @@ shinyUI(navbarPage(
         tags$p(
           "It is evident that there is indeed a rise in average temperature;
            there is also an apparent",
-          "a rise in recorded natural disasters. A more in-depth analysis of 
+          "rise in recorded natural disasters. A more in-depth analysis of 
            each state's temperatures can be seen in the next tab. This will 
            provide clarity towards understanding the temperature trends in the
            U.S."
@@ -164,15 +163,16 @@ shinyUI(navbarPage(
         )
       ),
       mainPanel(
-        tags$h2(id = "main-heading", "How much is the US spending on 
+        tags$h2(id = "main-heading", "How much is the U.S. spending on 
                 disasters per year?"),
         tags$p("We complied data for U.S. disaster spendings, natural disaster
                occurrences and the total damage in cost for as a result of 
                these disasters."),
         plotlyOutput("plot3"),
-        tags$p("As we focus on the impact on the U.S. as a nation, we inquired
+        tags$p("As we focus on attention on the U.S. as a nation, we inquired
                how much the U.S. spends on natural disasters and the damage
-               that they inflict. From this graph, there is a clear increasing
+               inflicted from these events. From this graph, there is a clear 
+               increasing
                trend of natural disaster spending. In addition to this, the
                frequencies of which natural disasters are occurring have also
                increased as time progresses, similar to how average temperatures
@@ -217,7 +217,7 @@ shinyUI(navbarPage(
 
   tabPanel(
     "Global Map",
-    titlePanel("Global Map of Disasters and Temperature"),
+    titlePanel("Temperature and Disasters"),
     # Create sidebar layout
     sidebarLayout(
       # Used the link below to figure out how to remove comma from years
@@ -233,8 +233,19 @@ shinyUI(navbarPage(
         )
       ),
       mainPanel(
-        tags$h2(id = "main-heading", ""),
-        plotlyOutput("plot5")
+        tags$h2(id = "main-heading", "Where has temperature changed the most?"),
+        tags$p("Average Temperature Change to Given Year:  Do these people
+               experience a higher frequency of natural disaster as well?
+               This map depicts multiple factors converging on a global
+               scale to answer these questions."),
+        plotlyOutput("plot5"),
+        tags$p("From this map, a picture is painted where a majority of 
+               countries experience an average temperature increase. A few
+               outliers are northern most countries like Greenland and
+               Russia. Despite these outliers, a significant trend that is
+               evident is how large land masses that experience a notable
+               average temperature change also experience more frequent
+               natural disasters, some examples being USA, China and Mexico.")
       )
     )
   )

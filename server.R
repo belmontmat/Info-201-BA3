@@ -301,10 +301,10 @@ shinyServer(function(input, output) {
     "As you can see by the graph, the amount of disasters trends upward with 
     higher temperatures. This shows a correlation between how hot it is and how
     many disasters occur. We can also observe the fact that Asia has the highest
-    occurrence of overall. This could be attributed to the high amount of greenhouse
-    gasses emmited by China and other developing countries. It could also have to do
-    with geographical location, since the Americas emits a high amount of greenhouse
-    gasses, yet remains relativley low in disaster occurrences."
+    occurrence of overall natural disasters. This could be attributed to the high amount of greenhouse
+    gasses emitted by China and other developing countries. It may also have to do
+    with geographical location, since the Americas emit a high amount of greenhouse
+    gasses, yet remains relatively low in disaster occurrences."
   })
 
   # Tab 5 -------------------------------------------------------------------
