@@ -91,6 +91,7 @@ shinyUI(navbarPage(
       )
     )
   ),
+  
   # Create a tabPanel to show your bar plot
   tabPanel(
     "Tab 2",
@@ -105,7 +106,7 @@ shinyUI(navbarPage(
       ),
       mainPanel(
         tags$h2(id = "main-heading", ""),
-        plotOutput("plot2")
+        plotlyOutput("plot2")
       )
     )
   ),
