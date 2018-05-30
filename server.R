@@ -197,7 +197,7 @@ shinyServer(function(input, output) {
       layout(title = ~paste("Temperatures for", average_1800_2015_temp$State,
                             "and the United States"),
              paper_bgcolor='rgb(255,255,255)', plot_bgcolor='rgb(229,229,229)',
-             hovermode = 'compare',
+             hovermode = 'compare', margin = list(b = (50)),
              xaxis = list(title = "Years",
                           gridcolor = 'rgb(255,255,255)',
                           showgrid = TRUE,
