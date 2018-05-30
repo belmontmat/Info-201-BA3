@@ -93,7 +93,7 @@ shinyServer(function(input, output) {
     average_usa_temp$dt <- substr(average_usa_temp$dt, 1, 4)
     # oldest date - 1750, farthest date 2010
     average_usa_temp <- average_usa_temp %>%
-      filter(dt > 1799)
+      filter(dt > 1814)
     
     average_1800_2015_temp <- data.frame(
       Year = seq(1815, 2010, 5),
@@ -110,8 +110,8 @@ shinyServer(function(input, output) {
     national_state_temp$State <- "Nation"
     
     specific_state_temp <- average_usa_temp %>%
-      filter(State == "Washington")
-    average_1800_2015_temp$State <- "Washington"
+      filter(State == input$state_select)
+    average_1800_2015_temp$State <- input$state_select
     
     inc <- function(x)
     {
