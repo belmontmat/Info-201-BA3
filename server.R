@@ -69,7 +69,19 @@ shinyServer(function(input, output) {
     
   })
   # Plot for Tab 3
-  output$plot3 <- renderPlot ({
+  output$plot3 <- renderPlotly ({
+    disasters <- read.csv("data/emdat-disasters/USA_disasters_gapless.csv", stringsAsFactors = FALSE)
+    plot_data <- disasters %>% 
+      filter(year >= input$tab3_slider[1]) %>% 
+      filter(year <= input$tab3_slider[2])
+    
+    plot_ly(
+      x = plot_data$year,
+      y = plot_data$occurrence,
+      type = "bar",
+      color = plot_data$Total.damage....000.US..
+    ) %>% 
+      colorbar(title = "Damage Cost (Dollars)")
     
   })
   # Plot for Tab 4

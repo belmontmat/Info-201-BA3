@@ -79,19 +79,18 @@ shinyUI(navbarPage(
     )
   ),
   tabPanel(
-    "Tab 3",
-    titlePanel(""),
+    "Cost Bar Graph",
+    titlePanel("Cost Bar Graph"),
     # Create sidebar layout
     sidebarLayout(
       
       # Side panel for controls
       sidebarPanel(
-        # selectInput(
-        # )
+          sliderInput("tab3_slider", "Year Range", min = 1944, max = 2018, value = c(1950, 2000))
       ),
       mainPanel(
         tags$h2(id = "main-heading", ""),
-        plotOutput("plot3")
+        plotlyOutput("plot3")
       )
     )
   ),
