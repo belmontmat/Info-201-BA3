@@ -11,4 +11,4 @@ We'll be using the [Data Society]("https://datasociety.com/about-us/") for our c
 Our data from both databases are from .csv files. However, because we are using multiple data sets we will need to join the two data sets by location which we expect to be contained in dplyr and ggplot2. Our major challenges we anticipate are mostly wrangling our two data sets into a format to where we can make many graphs from them, this may have to be solved by creating a few data frames rather than just one.  
 
 ## Website
-[link]("https://belmontmat.shinyapps.io/Info-201-BA3/")
+https://belmontmat.shinyapps.io/Info-201-BA3/
