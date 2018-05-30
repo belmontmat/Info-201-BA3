@@ -74,7 +74,7 @@ shinyUI(navbarPage(
     )
   ),
   tabPanel(
-    "Tab 4",
+    "Global Line Graph",
     titlePanel(""),
     # Create sidebar layout
     sidebarLayout(
