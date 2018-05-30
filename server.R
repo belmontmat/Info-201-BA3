@@ -246,7 +246,8 @@ shinyServer(function(input, output) {
   # Plot
   output$plot4 <- renderPlot({
     # get needed data
-    temp <- read.csv("data/data-society-global-climate-change-data/AverageGlobalTempPerYear.csv",
+    temp <- read.csv(paste0("data/data-society-global-climate-change-data/",
+                     "AverageGlobalTempPerYear.CSV"),
       stringsAsFactors = FALSE
     )
     disa <- read.csv("data/emdat-disasters/Data.csv",
