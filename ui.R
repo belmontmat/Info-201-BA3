@@ -56,7 +56,7 @@ shinyUI(navbarPage(
 
   tabPanel(
     "USA Heatmap",
-    titlePanel("U.S. All-In-One Overview"),
+    titlePanel("USA Heatmap"),
     # Create sidebar layout
     sidebarLayout(
 
@@ -73,12 +73,11 @@ shinyUI(navbarPage(
       ),
       mainPanel(
         tags$link(rel = "stylesheet", type = "text/css", href = "style.css"),
-        tags$h2(id = "main-heading", "Temperature By Year"),
+        tags$h2(id = "main-heading", "The U.S. By Year"),
         tags$p(
           "How has temperature in the U.S. as a whole changed over time? ",
           "Has this had an impact on number of natural disasters?",
-          "On this page we can see a visual
-          overview of many different factors."
+          "On this page we can see a visual overview of many different factors."
         ),
         plotlyOutput("plot1"),
         textOutput("disaster_text"),

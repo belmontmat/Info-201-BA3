@@ -67,6 +67,9 @@ shinyServer(function(input, output) {
   output$temp_text <- renderText({
     source("scripts/avg_usa_temp.R")
     specific <- joined %>% filter(dt == input$year)
+    if (input$unit == "Fahrenheit") {
+      specific$AverageTemperature <- specific$AverageTemperature * 1.8 + 32
+    }
     paste0(
       "The average temperature in the U.S. was ",
       round(mean(specific$AverageTemperature), 1),
@@ -281,7 +284,7 @@ shinyServer(function(input, output) {
         y = "Number of Disasters",
         x = "Temperature"
       ) +
-      scale_color_discrete(
+      scale_color_hue(
         name = "Line Color",
         labels = c("Total", input$continent_tab4)
       )
