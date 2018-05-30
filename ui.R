@@ -21,9 +21,9 @@ shinyUI(navbarPage(
       tags$p(
         "This project is aimed towards allowing users to discover the
         relationships and impacts between the increase in temperature
-        and number of natural disasters.",
+        and number of natural disasters in recent history",
         "Recently the U.S. has pulled out of the Paris Climate Agreement,
-        so we have focused on the U.S. to drive home that
+        so we have focused the first 3 tabs on the U.S. to drive home that
         this is a both local and global phenomenon."
       ),
       img(src = "emdat.jpg", align = "center"),
@@ -47,7 +47,8 @@ shinyUI(navbarPage(
           href = "https://data.world/data-society/global-climate-change-data"
         ),
         ", which is a database of datasets."
-      )
+      ),
+      tags$p("Hopefully, together we can make the world a better place.")
     )
   ),
 
@@ -87,8 +88,8 @@ shinyUI(navbarPage(
         textOutput("temp_text"),
         tags$p(
           "It is evident that there is indeed a rise in average temperature;
-           there is also an apparent",
-          "rise in recorded natural disasters. A more in-depth analysis of 
+           there is also an apparent rise in recorded natural disasters",
+          "in the U.S. A more in-depth analysis of 
            each state's temperatures can be seen in the next tab. This will 
            provide clarity towards understanding the temperature trends in the
            U.S."

@@ -59,7 +59,8 @@ shinyServer(function(input, output) {
     if (is.na(num_dis)) {
       paste0("There is no data on natural disasters for this year.")
     } else if (num_dis != 1) {
-      paste0("There were ", num_dis, " natural disasters in ", input$year, ".")
+      paste0("There were ", num_dis, " natural disasters in ", input$year,
+             ".")
     } else {
       paste0("There was one natural disaster in ", input$year, ".")
     }
@@ -84,7 +85,8 @@ shinyServer(function(input, output) {
   output$plot2 <- renderPlotly({
     #read temperature data frame
     #source("scripts/yearly_temp_change_usa.R")
-    temp_df <- read.csv("data/data-society-global-climate-change-data/GlobalLandTemperaturesByState.csv",
+    temp_df <- read.csv(paste0("data/data-society-global-climate-change-data/",
+                        "GlobalLandTemperaturesByState.csv"),
                         stringsAsFactors = FALSE)
     
     #create new data frame for average temp per year
