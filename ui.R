@@ -73,22 +73,15 @@ shinyUI(navbarPage(
       ),
       mainPanel(
         tags$link(rel = "stylesheet", type = "text/css", href = "style.css"),
-<<<<<<< HEAD
-        tags$h2(id = "main-heading", "The U.S. By Year"),
-=======
         tags$h2(id = "main-heading", "How has temperature in the U.S. as a 
                 whole changed over time?"),
->>>>>>> 58617c1a2288dec518a97030cf8f99d0c5a76c89
         tags$p(
           "Temperature By Year: ",
           "Has this had an impact on number of natural disasters?",
-<<<<<<< HEAD
-          "On this page we can see a visual overview of many different factors."
-=======
-          "On this page we can see a visualization
+          "On this page we can see a visual overview of many different",
+          "factors. On this page we can see a visualization
           which overviews many different factors that look into these
           questions."
->>>>>>> 58617c1a2288dec518a97030cf8f99d0c5a76c89
         ),
         plotlyOutput("plot1"),
         textOutput("disaster_text"),

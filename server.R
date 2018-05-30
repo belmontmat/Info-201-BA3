@@ -268,7 +268,7 @@ shinyServer(function(input, output) {
           aes(
             x = combined$Temp,
             y = combined$occurrence,
-            color = "red"
+            color = "Countries Combined"
           )
       ) +
       geom_line(
@@ -276,7 +276,7 @@ shinyServer(function(input, output) {
           aes(
             x = continent_combined$Temp,
             y = continent_combined$occurrence,
-            color = "blue"
+            color = input$continent_tab4
           )
       ) +
       labs(
@@ -284,9 +284,10 @@ shinyServer(function(input, output) {
         y = "Number of Disasters",
         x = "Temperature"
       ) +
-      scale_color_hue(
-        name = "Line Color",
-        labels = c("Total", input$continent_tab4)
+      scale_color_manual(
+        name = "",
+        labels = c("Total", input$continent_tab4),
+        values = c("red","blue")
       )
 
     ggplotly(p) %>%
